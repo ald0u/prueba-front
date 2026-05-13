@@ -11,7 +11,7 @@ body {
   color: #333;
 }
 
-/* ---------------------- Error Notification Styles ----------------------- */
+/* #region ----------------------- Error Notification Styles ----------------------- */
 .error-notification {
   position: fixed;
   top: 20px;
@@ -57,3 +57,138 @@ body {
     transform: translateX(0);
   }
 }
+/* #endregion */
+
+/* #region ----------------------- App Container Styles ----------------------- */
+.appcontainer {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  min-height: 100vh;
+}
+/* #endregion */
+
+/* #region ----------------------- Sidebar Styles ----------------------- */
+.sidebar {
+  background-color:linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.sidebar-header {
+  margin-bottom: 30px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-icon {
+  background-color: white;
+  color: #667eea;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.logo-text {
+  font-size: 16px;
+  font-weight: 600;
+}
+/* #endregion */
+
+/* #region ----------------------- Seccion remesas Styles ----------------------- */
+.remesas-section {
+  flex: 1;
+}
+
+.section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+/* #endregion */
+
+/* #region ----------------------- Calculadora remesas Styles ----------------------- */
+.calculator {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+.calculator-display {
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 20px;
+  border-radius: 8px;
+  text-align: right;
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 16px;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  letter-spacing: 2px;
+}
+
+.calculator-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.calc-btn {
+  background-color: rgba(255, 255, 255, 0.2);
+  border: none;
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #667eea;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.calc-btn:hover {
+  background-color: white;
+  transform: translateY(-2px);
+}
+
+.calc-btn:active {
+  transform: translateY(0);
+}
+
+.calc-delete {
+  background-color: rgba(255, 77, 79, 0.8);
+  color: white;
+}
+
+.calc-delete:hover {
+  background-color: #ff4d4f;
+}
+
+.calc-enter {
+  background-color: rgba(46, 213, 115, 0.8);
+  color: white;
+  grid-row: span 2;
+}
+
+.calc-enter:hover {
+  background-color: #2ed573;
+}
+
+.calc-zero {
+  grid-column: span 2;
+}
+/* #endregion */
+

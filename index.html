@@ -4,15 +4,80 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ventana Digital - Remesas</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   
   <!-- Error Notification -->
-<div id="errorNotification" class="error-notification hidden">
-  <i class="fas fa-exclamation-circle"></i>
-  <span id="error-message"></span>
-  <button id="retryButton" onclick="closeError()" class="close-btn">&times;</button>
-</div>
+  <div id="errorNotification" class="error-notification hidden">
+    <i class="fas fa-exclamation-circle"></i>
+    <span id="error-message"></span>
+    <button id="retryButton" onclick="closeError()" class="close-btn">&times;</button>
+  </div>
+  
+  <!-- App Container -->
+  <div class="appcontainer">
+    
+    <!--#region Sidebar izquierdo -->
+    <aside class="sidebar">
+      <div class="sidebar-header">  
+        <div class="logo">
+          <div class="logo-icon">n09</div>
+          <span class="logo-text">Ventana Digital</span>
+        </div>
+      </div>
+      
+      <!-- Calculadora Remesas -->
+      <div class="remesas-section">
+        <h2 class="section-title">Remesas</h2>
+        <div id="calculatorDisplay" class="calculator-display">***</div>
+        
+        <div class="calculator-buttons">
+          <button class="calc-btn" onclick="addNumber(1)">1</button>
+          <button class="calc-btn" onclick="addNumber(2)">2</button>
+          <button class="calc-btn" onclick="addNumber(3)">3</button>
+          <button class="calc-btn calc-delete" onclick="clearDisplay()">
+            <i class="fas fa-times"></i>
+          </button>
+          
+          <button class="calc-btn" onclick="addNumber(4)">4</button>
+          <button class="calc-btn" onclick="addNumber(5)">5</button>
+          <button class="calc-btn" onclick="addNumber(6)">6</button>
+          <button class="calc-btn calc-enter" onclick="processRemesa()">
+            <i class="fas fa-arrow-turn-down"></i>
+          </button>
+          
+          <button class="calc-btn" onclick="addNumber(7)">7</button>
+          <button class="calc-btn" onclick="addNumber(8)">8</button>
+          <button class="calc-btn" onclick="addNumber(9)">9</button>
+          <button class="calc-btn calc-zero" onclick="addNumber(0)">0</button>
+        </div>
+      </div>
+      
+      <!-- Navegacion -->
+      <nav class="sidebar-nav">
+          <a href="#" class="nav-item">
+            <i class="fas fa-home"></i>
+          </a>
+          <a href="#" class="nav-item active">
+            <i class="fas fa-money-bill-transfer"></i>
+          </a>
+          <a href="#" class="nav-item">
+            <i class="fas fa-credit-card"></i>
+          </a>
+          <a href="#" class="nav-item">
+            <i class="fas fa-file-invoice-dollar"></i>
+          </a>
+          <a href="#" class="nav-item">
+            <i class="fas fa-chart-line"></i>
+          </a>
+          <a href="#" class="nav-item">
+            <i class="fas fa-rotate"></i>
+          </a>
+      </nav>
+    </aside>
+    <!-- #endregion -->
 
 </body>
 </html>
