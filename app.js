@@ -18,6 +18,25 @@ let remesas = [
 ];
 // #endregion
 
+// #region Funciones de busqueda
+function toggleSearch() {
+  const searchBar = document.getElementById('searchBar');
+  searchBar.classList.toggle('hidden');
+  
+  if (!searchBar.classList.contains('hidden')) {
+    document.getElementById('searchInput').focus();
+  } else {
+    document.getElementById('searchInput').value = "";
+    clearSearch();
+  }
+}
+
+function clearSearch() {
+  const searchInput = document.getElementById('searchInput');
+  searchInput.value = "";
+  renderRemesas(remesas);
+}
+
 // #region Calculadora Remesas
 function addNumber(num) {
   if(calculatorValue.length >= 8) {

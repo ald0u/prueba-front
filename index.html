@@ -79,5 +79,51 @@
     </aside>
     <!-- #endregion -->
 
+    <!-- #region Contenido principal -->
+    <main class="main-content">
+      <header class="main-header">
+        <div class="header-left">
+          <div class="div date-info">
+            <span class="date-label">Hoy</span>
+            <span class="fas fa-search" id="currentDate"></span>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <button class="icon-btn" onclick="toggleSearch()">
+            <i class="fas fa-search"></i>
+          </button>
+          <button class="icon-btn">
+            <i class="fas fa-sliders"></i>
+          </button>
+          <button class="icon-btn">
+            <i class="fas fa-print"></i>
+          </button>
+          <button class="icon-btn">
+            <i class="fas fa-calendar"></i>
+          </button>
+
+          <div class="user-info">
+            <div class="notification-badge">
+              <i class="fas fa-bell"></i>
+              <span class="badge">3</span>
+            </div>
+            <img src="https://i.pravatar.cc/150?img=47" alt="Usuario" class="user-avatar">
+            <div class="user-details">
+              <span class="user-name">Juan Escamilla</span>
+              <span class="user-role">Administrador</span>
+            </div>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        </div>
+      </header>
+
+      
+      <h1 class="main-title">Remesas Recientes</h1>
+      <div id="remesasList" class="remesas-list">
+        <!-- Las remesas se cargarán aquí dinámicamente -->
+      </div>
+    </main>
+    <!-- #endregion -->
 </body>
 </html>
