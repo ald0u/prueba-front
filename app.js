@@ -27,7 +27,15 @@ let calculatorValue = "";
 
 document.addEventListener('DOMContentLoaded', () => {
   renderRemesas();
+  updateCurrentDate();
 });
+
+function updateCurrentDate() {
+  const now = new Date();
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  const formattedDate = now.toLocaleDateString('es-MX', options);
+  document.getElementById('currentDate').textContent = formattedDate;
+}
 
 // #region Funciones de remesas
 /*
