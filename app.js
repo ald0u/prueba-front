@@ -19,8 +19,120 @@ let remesas = [
 // #endregion
 
 // #region Variables globales
+let currentPage = 1;
+const itemsPerPage = 10;
 let filteredRemesas= [];
 let calculatorValue = "";
+// #endregion
+
+// #region Funciones de remesas
+/*
+* funcion getFilteredAndSortedRemesas: Filtra las remesas cobradas y las ordena por fecha de cobro de forma descendente.
+* Utiliza el método filter para obtener solo las remesas con estado "COBRADO" y luego ordena el resultado utilizando el método sort, comparando las fechas de cobro en formato ISO.
+* Devuelve la lista de remesas filtradas y ordenadas.
+*/
+function getFilteredAndSortedRemesas() {
+  let cobradas = remesas.filter(r => r.status === 'COBRADO');
+
+  cobradas.sort((a, b) => {return b.charged_at.localeCompare(a.charged_at)});
+
+  return cobradas;
+}
+
+/*
+* funcion renderRemesas: Renderiza la tabla de remesas cobradas en la interfaz de usuario.
+* Obtiene las remesas filtradas y ordenadas utilizando la función getFilteredAndSortedRemesas.
+* Calcula el número total de páginas según la cantidad de remesas y los elementos por página.
+* Si la página actual es mayor que el número total de páginas, ajusta la página actual al número total de páginas.
+* Si no hay remesas para mostrar, establece la página actual en 1.
+* Calcula los índices de inicio y fin para mostrar las remesas correspondientes a la página actual.
+* Limpia el contenido del cuerpo de la tabla y agrega filas para cada remesa a mostrar.
+* Si no hay remesas para mostrar, muestra un mensaje indicando que no se encontraron resultados.
+* Finalmente, llama a la función renderPagination para mostrar los controles de paginación.
+*/
+function renderRemesas() {
+  const sortedRemesas = getFilteredAndSortedRemesas();
+  filteredRemesas = sortedRemesas;
+  const totalPages = Math.ceil(filteredRemesas.length / itemsPerPage);
+
+  if(currentPage > totalPages && totalPages > 0) currentPage = totalPages;
+
+  if(totalPages === 0) currentPage = 1;
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const remesasToShow = filteredRemesas.slice(startIndex, endIndex);
+
+  const tbody = document.getElementById('remesasTableBody');
+  tbody.innerHTML = "";
+
+  if(remesasToShow.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="3" style="text-align: center; padding: 40px; color: #999;">No se encontraron resultados</td></tr>';
+  }else {
+    remesasToShow.forEach(remesa => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${remesa.id}</td>
+        <td>${remesa.company}</td>
+        <td>$${parseFloat(remesa.amount).toLocaleString('es-MX', { minimumFractionDigits: 2 })}</td>
+      `;
+      tbody.appendChild(row);
+    });
+  }
+
+  renderPagination(totalPages);
+}
+
+/*
+* funcion renderPagination: Renderiza los controles de paginación en la interfaz de usuario.
+* Obtiene el elemento de paginación por su ID y limpia su contenido.
+* Si el número total de páginas es menor o igual a 1, no muestra los controles de paginación.
+* Crea un botón de "Anterior" y lo deshabilita si la página actual es la primera.
+* Agrega un evento de clic al botón de "Anterior" para navegar a la página anterior si no se encuentra en la primera página.
+* Crea botones para cada página y los marca como activos si corresponden a la página actual.
+* Agrega eventos de clic a cada botón de página para navegar a la página correspondiente al hacer clic.
+* Crea un botón de "Siguiente" y lo deshabilita si la página actual es la última.
+* Agrega un evento de clic al botón de "Siguiente" para navegar a la página siguiente si no se encuentra en la última página.
+*/
+function renderPagination(totalPages) {
+  const pagination = document.getElementById('pagination');
+  pagination.innerHTML = "";
+
+  if(totalPages <= 1) return;
+
+  const prevButton = document.createElement('button');
+  prevButton.innerHTML = '<i class="fas fa-chevron-left"></i>';
+  prevButton.disabled = currentPage === 1;
+  prevButton.onclick = () => {
+    if(currentPage > 1) {
+      currentPage--;
+      renderRemesas();
+    }
+  };
+  pagination.appendChild(prevButton);
+
+  for(let i = 1; i <= totalPages; i++) {
+    const pageButton = document.createElement('button');
+    pageButton.textContent = i;
+    pageButton.className = i === currentPage ? 'active' : '';
+    pageButton.onclick = () => {
+      currentPage = i;
+      renderRemesas();
+    }
+    pagination.appendChild(pageButton);
+  }
+
+  const nextButton = document.createElement('button');
+  nextButton.innerHTML = '<i class="fas fa-chevron-right"></i>';
+  nextButton.disabled = currentPage === totalPages;
+  nextButton.onclick = () => {
+    if(currentPage < totalPages) {
+      currentPage++;
+      renderRemesas();
+    }
+  };
+  pagination.appendChild(nextButton);
+}
 // #endregion
 
 // #region Funciones de busqueda
@@ -104,8 +216,9 @@ function clearSearch() {
   searchInput.value = "";
   renderRemesas(remesas);
 }
-// #region Calculadora Remesas
+// #endregion
 
+// #region Calculadora Remesas
 /*
 * funcion addNumber: Agrega un número a la cadena de valor de la calculadora.
 * Verifica si la longitud de la cadena es menor a 8 dígitos antes de agregar el número.
