@@ -118,10 +118,30 @@
         </div>
       </header>
 
-      
-      <h1 class="main-title">Remesas Recientes</h1>
-      <div id="remesasList" class="remesas-list">
-        <!-- Las remesas se cargarán aquí dinámicamente -->
+      <!-- Barra de busqueda -->
+        <div id="searchBar" class="search-bar hidden">
+          <input type="text" id="searchInput" placeholder="Buscar remesas..." oninput="filterRemesas()">
+          <button onclick="clearSearch()">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+
+      <!-- Tabla de Remesas -->
+       <div class="remesas-table-container">
+        <table class="remesas-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Compañía</th>
+              <th>Monto</th>
+            </tr>
+          </thead>
+          <tbody id="remesasTableBody"></tbody>
+        </table>
+       </div>
+
+       <!-- Paginación -->
+      <div id="pagination" class="pagination">
       </div>
     </main>
     <!-- #endregion -->

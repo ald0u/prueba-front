@@ -105,7 +105,7 @@ body {
 }
 /* #endregion */
 
-/* #region ----------------------- Seccion remesas Styles ----------------------- */
+/* #region ----------------------- Section remesas Styles ----------------------- */
 .remesas-section {
   flex: 1;
 }
@@ -118,7 +118,7 @@ body {
 }
 /* #endregion */
 
-/* #region ----------------------- Calculadora remesas Styles ----------------------- */
+/* #region ----------------------- Calculator remesas Styles ----------------------- */
 .calculator {
   background-color: rgba(255, 255, 255, 0.1);
   padding: 20px;
@@ -355,3 +355,155 @@ body {
   color: #999;
   font-size: 12px;
 }
+/* #endregion */
+
+/* #region ----------------------- Search Bar Styles ----------------------- */
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 32px;
+  background-color: white;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.search-bar.hidden {
+  display: none;
+}
+
+.search-bar input {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.search-bar input:focus {
+  border-color: #667eea;
+}
+
+.search-bar button {
+  background-color: #ff4757;
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.search-bar button:hover {
+  background-color: #ee5a6f;
+}
+/* #endregion */
+
+/* #region ----------------------- Table Remesas Styles ----------------------- */
+.remesas-table-container{
+  flex: 1;
+  padding: 32px;
+  overflow-x: auto;
+}
+
+.remesas-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.remesas-table thead {
+  background-color: #667eea;
+  color: white;
+}
+
+.remesas-table th {
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 500;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.remesas-table tbody tr {
+  border-bottom: 1px solid #eee;
+  transition: background-color 0.2s;
+}
+
+.remesas-table tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
+.remesas-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.remesas-table td {
+  padding: 12px 16px;
+  font-size: 14px;
+  color: #333;
+}
+
+.remesas-table td:first-child {
+  font-weight: 500;
+  color: #667eea;
+}
+
+.remesas-table td:last-child {
+  font-weight: 500;
+  color: #2ed573;
+}
+/* #endregion */
+
+/* #region ----------------------- Pagination Styles ----------------------- */
+.pagination {
+  display: flex;
+  padding: 20px 32px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.pagination button {
+  background-color: white;
+  border: 2px solid #e0e0e0;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  min-width: 40px;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pagination button:hover:not(:disabled) {
+  background-color: #667eea;
+  border-color: #667eea;
+  color: white;
+}
+
+.pagination button.active {
+  background-color: #667eea;
+  border-color: #667eea;
+  color: white;
+}
+
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+/* #endregion */
