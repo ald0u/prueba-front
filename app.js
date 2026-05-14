@@ -38,6 +38,13 @@ function clearSearch() {
 }
 
 // #region Calculadora Remesas
+
+/*
+* funcion addNumber: Agrega un número a la cadena de valor de la calculadora.
+* Verifica si la longitud de la cadena es menor a 8 dígitos antes de agregar el número.
+* Si se alcanza el límite, muestra un mensaje de error y no agrega el número.
+* Después de agregar el número, actualiza la pantalla de la calculadora.
+*/
 function addNumber(num) {
   if(calculatorValue.length >= 8) {
     showError("Máximo 8 dígitos");
@@ -48,16 +55,34 @@ function addNumber(num) {
   updateDisplay();
 }
 
+/*
+* funcion clearDisplay: Limpia la cadena de valor de la calculadora y actualiza la pantalla.
+* Establece la variable calculatorValue como una cadena vacía y llama a updateDisplay para reflejar el cambio en la pantalla.
+*/
 function clearDisplay() {
   calculatorValue = "";
   updateDisplay();
 }
 
+/*
+* funcion updateDisplay: Actualiza el contenido de la pantalla de la calculadora.
+* Obtiene el elemento de la pantalla por su ID y establece su texto como el valor actual de la calculadora.
+* Si el valor de la calculadora es una cadena vacía, muestra "***" en la pantalla.
+*/
 function updateDisplay() {
   const display = document.getElementById('calculatorDisplay');
   display.textContent = calculatorValue || "***";
 }
 
+/*
+* funcion processRemesa: Procesa la remesa ingresada en la calculadora.
+* Verifica si el valor de la calculadora está vacío o tiene más de 8 dígitos, mostrando un mensaje de error en ambos casos.
+* Busca la remesa correspondiente al número ingresado en la lista de remesas.
+* Si la remesa no se encuentra, muestra un mensaje de error y limpia la pantalla.
+* Si la remesa ya ha sido cobrada, muestra un mensaje de error indicando la fecha de cobro y limpia la pantalla.
+* Si la remesa es válida y no ha sido cobrada, actualiza su estado a "COBRADO" y establece la fecha de cobro como la fecha actual.
+* Finalmente, limpia la pantalla y muestra un mensaje de éxito indicando que la remesa ha sido cobrada exitosamente.
+*/
 function processRemesa() {
 
   if(calculatorValue === "") {
@@ -93,11 +118,22 @@ function processRemesa() {
 // #endregion
 
 // #region Notifiations
+
+/*
+* funcion CloseError: Cierra la notificación de error después de mostrarla durante un tiempo determinado.
+* Obtiene el elemento de notificación por su ID y le agrega la clase 'hidden' para ocultarlo.
+*/
 function closeError() { 
   const notification = document.getElementById('errorNotification');
   notification.classList.add('hidden');
 }
 
+/*
+* funcion showError: Muestra una notificación de error con un mensaje específico.
+* Obtiene el elemento de notificación y el span para el mensaje por sus IDs.
+* Establece el texto del mensaje, muestra la notificación y cambia su color de fondo a rojo.
+* Después de 3 segundos, llama a closeError para ocultar la notificación.
+*/
 function showError(message) {
   const notification = document.getElementById('errorNotification');
   const messageSpan = document.getElementById('errorMessage');
@@ -112,6 +148,12 @@ function showError(message) {
   }, 3000);
 }
 
+/*
+* funcion showSuccess: Muestra una notificación de éxito con un mensaje específico.
+* Obtiene el elemento de notificación y el span para el mensaje por sus IDs.
+* Establece el texto del mensaje, muestra la notificación y cambia su color de fondo a verde.
+* Después de 3 segundos, llama a closeError para ocultar la notificación.
+*/
 function showSuccess(message){
   const notification = document.getElementById('errorNotification');
   const messageSpan = document.getElementById('errorMessage');
