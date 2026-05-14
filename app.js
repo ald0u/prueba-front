@@ -18,7 +18,71 @@ let remesas = [
 ];
 // #endregion
 
+// #region Variables globales
+let filteredRemesas= [];
+let calculatorValue = "";
+// #endregion
+
 // #region Funciones de busqueda
+/**
+ * funcion filterRemesas: Filtra las remesas cobradas según el término de búsqueda ingresado por el usuario.
+ * Obtiene el término de búsqueda del input, lo convierte a minúsculas y elimina espacios en blanco.
+ * Si el término de búsqueda está vacío, renderiza todas las remesas y reinicia la página actual.
+ */
+function  filterRemesas() {
+  const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+
+  if(searchTerm === "") {
+    currentPage = 1;
+    renderRemesas(remesas);
+    return;
+  }
+
+  const cobradas = remesas.filter(r => r.status ==='COBRADO');
+
+  filteredRemesas = cobradas.filter(remesa => {
+    const id = remesa.id.toLowerCase();
+    const company = remesa.company.toLowerCase();
+    const amount = remesa.amount.toLowerCase();
+    
+    return id.includes(searchTerm) || company.includes(searchTerm) || amount.includes(searchTerm);
+  });
+
+  filteredRemesas.sort((a, b) => b.charged_at.localeCompare(a.charged_at));
+
+  currentPage = 1;
+
+  const totalPages = Math.ceil(filteredRemesas.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const remesasToShow = filteredRemesas.slice(startIndex, endIndex);
+
+  const tbody = document.getElementById('remesasTableBody');
+  tbody.innerHTML = "";
+
+  if(remesasToShow.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="3" style="text-align: center; padding: 40px; color: #999;">No se encontraron resultados</td></tr>';
+  }else {
+    remesasToShow.forEach(remesa => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${remesa.id}</td>
+        <td>${remesa.company}</td>
+        <td>$${parseFloat(remesa.amount).toLocaleString('es-MX', { minimumFractionDigits: 2 })}</td>
+      `;
+      tbody.appendChild(row);
+    });
+  }
+
+  renderPagination(totalPages);
+}
+
+/**
+* funcion toggleSearch: Alterna la visibilidad de la barra de búsqueda.
+* Obtiene el elemento de la barra de búsqueda por su ID y le agrega o quita la clase 'hidden' para mostrar u ocultar la barra.  
+* Si la barra de búsqueda se muestra, enfoca el input para que el usuario pueda comenzar a escribir de inmediato.
+* Si la barra de búsqueda se oculta, limpia el valor del input y llama a clearSearch para mostrar todas las remesas nuevamente.
+*/
 function toggleSearch() {
   const searchBar = document.getElementById('searchBar');
   searchBar.classList.toggle('hidden');
@@ -31,12 +95,15 @@ function toggleSearch() {
   }
 }
 
+/**
+* funcion clearSearch: Limpia el valor del input de búsqueda y renderiza todas las remesas.
+* Obtiene el elemento del input de búsqueda por su ID, establece su valor como una cadena vacía y llama a renderRemesas para mostrar todas las remesas nuevamente.
+*/
 function clearSearch() {
   const searchInput = document.getElementById('searchInput');
   searchInput.value = "";
   renderRemesas(remesas);
 }
-
 // #region Calculadora Remesas
 
 /*
