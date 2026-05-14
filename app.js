@@ -25,6 +25,10 @@ let filteredRemesas= [];
 let calculatorValue = "";
 // #endregion
 
+document.addEventListener('DOMContentLoaded', () => {
+  renderRemesas();
+});
+
 // #region Funciones de remesas
 /*
 * funcion getFilteredAndSortedRemesas: Filtra las remesas cobradas y las ordena por fecha de cobro de forma descendente.
