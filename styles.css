@@ -140,6 +140,7 @@ body {
   align-items: center;
   justify-content: flex-end;
   letter-spacing: 2px;
+  color: black
 }
 
 .calculator-buttons {

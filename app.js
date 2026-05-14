@@ -297,6 +297,7 @@ function processRemesa() {
   remesa.charged_at = new Date().toISOString().split('T')[0].replace(/-/g, '');
 
   clearDisplay();
+  renderRemesas();
   showSuccess(`Remesa ${remesa.id} cobrada exitosamente`);
 }
 // #endregion
@@ -320,7 +321,7 @@ function closeError() {
 */
 function showError(message) {
   const notification = document.getElementById('errorNotification');
-  const messageSpan = document.getElementById('errorMessage');
+  const messageSpan = document.getElementById('error-message');
 
   messageSpan.textContent = message;
   notification.classList.remove('hidden');
@@ -340,7 +341,7 @@ function showError(message) {
 */
 function showSuccess(message){
   const notification = document.getElementById('errorNotification');
-  const messageSpan = document.getElementById('errorMessage');
+  const messageSpan = document.getElementById('error-message');
 
   messageSpan.textContent = message;
   notification.classList.remove('hidden');
